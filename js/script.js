@@ -33,8 +33,18 @@ function openForm() {
   form.style.display = "block";
 }
 
-//Cancel button here
-function cancelForm() {}
+function cancelForm() {
+  clearForm();
+  let form = document.getElementById("book-form");
+  form.style.display = "none";
+}
+
+function clearForm() {
+  var inputs = form.querySelectorAll("input");
+  for (var i = 0; i < inputs.length; i++) {
+    inputs[i].value = "";
+  }
+}
 
 let myLibrary = [];
 
@@ -54,10 +64,7 @@ form.addEventListener("submit", function (event) {
 
   updateTable();
 
-  var inputs = form.querySelectorAll("input");
-  for (var i = 0; i < inputs.length; i++) {
-    inputs[i].value = "";
-  }
+  clearForm();
 
   form.style.display = "none";
 

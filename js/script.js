@@ -11,10 +11,13 @@ function addBookToLibrary(book) {
 
 function updateTable() {
   const tableBody = document.getElementById("table-body");
+  //clears the table
   while (tableBody.firstChild) {
     tableBody.removeChild(tableBody.firstChild);
   }
-  for (let book of myLibrary) {
+  //populates the table
+  for (let i = 0; i < myLibrary.length; i++) {
+    const book = myLibrary[i];
     const row = tableBody.insertRow();
     const titleCell = row.insertCell();
     const authorCell = row.insertCell();
@@ -25,6 +28,8 @@ function updateTable() {
     authorCell.innerText = book.author;
     pagesCell.innerText = book.pages;
     readCell.innerText = book.read;
+
+    row.setAttribute("data-book-id", i);
   }
 }
 
@@ -68,5 +73,6 @@ form.addEventListener("submit", function (event) {
 
   form.style.display = "none";
 
-  console.log(myLibrary);
+  console.log(myLibrary)
 });
+

@@ -19,10 +19,12 @@ function updateTable() {
   for (let i = 0; i < myLibrary.length; i++) {
     const book = myLibrary[i];
     const row = tableBody.insertRow();
+
     const titleCell = row.insertCell();
     const authorCell = row.insertCell();
     const pagesCell = row.insertCell();
     const readCell = row.insertCell();
+    const removeCell = row.insertCell();
 
     titleCell.innerText = book.title;
     authorCell.innerText = book.author;
@@ -30,6 +32,12 @@ function updateTable() {
     readCell.innerText = book.read;
 
     row.setAttribute("data-book-id", i);
+
+    const removeButton = document.createElement("button");
+    removeButton.innerText = "Remove";
+    removeButton.className = "remove-button"
+
+    removeCell.appendChild(removeButton);
   }
 }
 
@@ -73,6 +81,5 @@ form.addEventListener("submit", function (event) {
 
   form.style.display = "none";
 
-  console.log(myLibrary)
+  console.log(myLibrary);
 });
-

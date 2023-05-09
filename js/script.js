@@ -35,9 +35,15 @@ function updateTable() {
 
     const removeButton = document.createElement("button");
     removeButton.innerText = "Remove";
-    removeButton.className = "remove-button"
+    removeButton.id = "remove-button" + i;
 
     removeCell.appendChild(removeButton);
+
+    const removeBookButton = document.getElementById("remove-button" + i);
+    removeBookButton.addEventListener("click", () => {
+      removeBook(i);
+      updateTable();
+    });
   }
 }
 
@@ -57,6 +63,10 @@ function clearForm() {
   for (var i = 0; i < inputs.length; i++) {
     inputs[i].value = "";
   }
+}
+
+function removeBook(i) {
+  myLibrary.splice(i, 1);
 }
 
 let myLibrary = [];

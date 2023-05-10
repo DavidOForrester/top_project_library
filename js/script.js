@@ -29,17 +29,37 @@ function updateTable() {
     titleCell.innerText = book.title;
     authorCell.innerText = book.author;
     pagesCell.innerText = book.pages;
-    readCell.innerText = book.read;
 
+    //read checkbox
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.id = "read-checkbox-" + i;
+    if (book.read == "on") {
+      checkbox.checked = true;
+    }
+    readCell.appendChild(checkbox);
+
+    //event listener for the read checkbox
+    const readCheckbox = document.getElementById("read-checkbox-" + i);
+    readCheckbox.addEventListener("change", (event) => {
+      if (event.target.checked) {
+        myLibrary[i]["read"] = "on"
+      } else {
+        myLibrary[i]["read"] = null
+      }
+    });
+
+    //not sure I need this anymore
     row.setAttribute("data-book-id", i);
 
+    //adds the remove button to the table
     const removeButton = document.createElement("button");
     removeButton.innerText = "Remove";
-    removeButton.id = "remove-button" + i;
-
+    removeButton.id = "remove-button-" + i;
     removeCell.appendChild(removeButton);
 
-    const removeBookButton = document.getElementById("remove-button" + i);
+    //event listener for the remove button
+    const removeBookButton = document.getElementById("remove-button-" + i);
     removeBookButton.addEventListener("click", () => {
       removeBook(i);
       updateTable();

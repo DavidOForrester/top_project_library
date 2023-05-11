@@ -5,6 +5,14 @@ function Book(title, author, pages, read) {
   this.read = read;
 }
 
+Book.prototype.readCheckbox = function(i, state) {
+  if (state) {
+    myLibrary[i]["read"] = "on"
+  } else {
+    myLibrary[i]["read"] = null
+  }
+}
+
 function addBookToLibrary(book) {
   myLibrary.push(book);
 }
@@ -42,15 +50,8 @@ function updateTable() {
     //event listener for the read checkbox
     const readCheckbox = document.getElementById("read-checkbox-" + i);
     readCheckbox.addEventListener("change", (event) => {
-      if (event.target.checked) {
-        myLibrary[i]["read"] = "on"
-      } else {
-        myLibrary[i]["read"] = null
-      }
+      book.readCheckbox(i, event.target.checked)
     });
-
-    //not sure I need this anymore
-    row.setAttribute("data-book-id", i);
 
     //adds the remove button to the table
     const removeButton = document.createElement("button");
@@ -111,5 +112,5 @@ form.addEventListener("submit", function (event) {
 
   form.style.display = "none";
 
-  console.log(myLibrary);
+  //console.log(myLibrary);
 });

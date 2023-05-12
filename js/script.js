@@ -69,13 +69,13 @@ function updateTable() {
 }
 
 function openForm() {
-  let form = document.getElementById("book-form");
+  let form = document.getElementById("form-modal");
   form.style.display = "block";
 }
 
 function cancelForm() {
   clearForm();
-  let form = document.getElementById("book-form");
+  let form = document.getElementById("form-modal");
   form.style.display = "none";
 }
 
@@ -108,9 +108,5 @@ form.addEventListener("submit", function (event) {
 
   updateTable();
 
-  clearForm();
-
-  form.style.display = "none";
-
-  //console.log(myLibrary);
+  cancelForm();
 });

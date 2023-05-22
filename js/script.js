@@ -1,21 +1,27 @@
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 
-Book.prototype.readCheckbox = function(i, state) {
-  if (state) {
-    myLibrary[i]["read"] = "on"
-  } else {
-    myLibrary[i]["read"] = null
+  addBookToLibrary(book) {
+    myLibrary.push(book);
+  }
+
+  removeBook(i) {
+    myLibrary.splice(i, 1);
   }
 }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
-}
+Book.prototype.readCheckbox = function (i, state) {
+  if (state) {
+    myLibrary[i]["read"] = "on";
+  } else {
+    myLibrary[i]["read"] = null;
+  }
+};
 
 function updateTable() {
   const tableBody = document.getElementById("table-body");
@@ -50,7 +56,7 @@ function updateTable() {
     //event listener for the read checkbox
     const readCheckbox = document.getElementById("read-checkbox-" + i);
     readCheckbox.addEventListener("change", (event) => {
-      book.readCheckbox(i, event.target.checked)
+      book.readCheckbox(i, event.target.checked);
     });
 
     //adds the remove button to the table
@@ -62,7 +68,7 @@ function updateTable() {
     //event listener for the remove button
     const removeBookButton = document.getElementById("remove-button-" + i);
     removeBookButton.addEventListener("click", () => {
-      removeBook(i);
+      book.removeBook(i);
       updateTable();
     });
   }
@@ -86,10 +92,7 @@ function clearForm() {
   }
 }
 
-function removeBook(i) {
-  myLibrary.splice(i, 1);
-}
-
+// Global code
 let myLibrary = [];
 
 const form = document.getElementById("book-form");
@@ -104,7 +107,7 @@ form.addEventListener("submit", function (event) {
 
   let book = new Book(title, author, pages, read);
 
-  addBookToLibrary(book);
+  book.addBookToLibrary(book);
 
   updateTable();
 
